@@ -1,53 +1,74 @@
-# BEST PRACTICE SOLUTION (BPS) — Premium SPA
+# BEST PRACTICE SOLUTION (BPS)
 
-Elite B2B Executive Search & Recruitment agency website.
-Dark luxurious aesthetic, metallic-gold accents, WebGL 3D hero pyramid,
-smooth scrolling and reveal-on-scroll animations.
+Premium, dark-luxury single-page site for an elite **B2B Executive Search &
+Recruitment** agency. Awwwards-grade: 3D WebGL gold prism, custom cursor,
+preloader, kinetic typography, layered parallax and scroll animations.
 
-> All UI copy is in **Russian** (per spec). Code, comments and names are in English.
+> All visible copy is **Russian** (per brand). Code/comments are English.
 
 ## Tech stack
 
 - **Next.js 14** (App Router) + **React 18** + **TypeScript**
-- **Tailwind CSS** (custom dark + gold design system)
-- **Three.js / @react-three/fiber / @react-three/drei** — 3D metallic gold pyramid
-- **Framer Motion** — reveal & micro-interactions
+- **Tailwind CSS** — custom dark + metallic-gold design system
+- **React Three Fiber / drei / postprocessing** — 3D gold prism with bloom
+- **Framer Motion** — reveals, counters, magnetic buttons, scroll progress
 - **Lenis** — smooth scrolling
 - **lucide-react** — icons
 
-## Getting started
+## Run locally
 
 ```bash
 npm install
 npm run dev      # http://localhost:3000
 npm run build    # production build
-npm start        # serve production build
+npm start        # serve the production build
 ```
+
+## Deploy to Vercel (recommended)
+
+The repo is already a git repo with an initial commit on `main`.
+
+1. **Push to GitHub.** In VS Code: open the `bps-site` folder → Source Control
+   panel → "Publish Branch" (sign in to GitHub). Or via CLI:
+   ```bash
+   git remote add origin https://github.com/<you>/bps-site.git
+   git push -u origin main
+   ```
+2. Go to **vercel.com → Add New → Project**, import the GitHub repo.
+   Vercel auto-detects Next.js — just click **Deploy**. No config needed.
+3. **Custom domain:** Project → Settings → Domains → add
+   `bestpracticesolution.uz`. Point the domain's DNS to Vercel (A/CNAME records
+   Vercel shows you). Email (Yandex MX records) stays untouched — Vercel only
+   handles the website's A/CNAME, your MX records keep mail working.
 
 ## Structure
 
 ```
 app/
-  layout.tsx        Fonts (Inter + Manrope, Cyrillic), metadata, smooth-scroll wrapper
+  layout.tsx        Fonts (Manrope/Inter/JetBrains Mono, Cyrillic) + global chrome
   page.tsx          Section composition
-  globals.css       Design tokens, gold gradients, grid/noise backgrounds
+  globals.css       Tokens, gold gradients, grid/noise, cursor, reduced-motion
 components/
-  Navbar.tsx        Sticky glass nav + mobile menu
-  Hero.tsx          Headline + dynamically-imported 3D scene
-  PyramidScene.tsx  R3F metallic gold pyramid, mouse-reactive
+  Preloader.tsx     0→100 counter + animated logo, locks scroll
+  Cursor.tsx        Custom gold dot + easing ring (desktop only)
+  ScrollProgress.tsx Gold top progress bar
+  Navbar.tsx        Glass nav, numbered links, magnetic CTA
+  Hero.tsx          Kinetic headline + parallax + 3D scene
+  PyramidScene.tsx  R3F extruded gold triangular prism, bloom, particles
   Marquee.tsx       Infinite keyword ribbon
   About.tsx         Company intro (B2B)
-  Geography.tsx     СНГ / ОАЭ / Китай и Индия cards
+  Stats.tsx         Animated count-up metrics
+  Geography.tsx     Interactive СНГ / ОАЭ / Китай-Индия switcher
   Expertise.tsx     Executive Search / Cross-border / Screening
   WhyUs.tsx         Reasons + "Главный итог"
-  Footer.tsx        Contacts (email / phone / address)
-  Reveal.tsx        Scroll-reveal helper
-  Logo.tsx          Gold triangle wordmark
-public/images/      Drop final custom images here (see images/README.md)
+  Footer.tsx        Contacts + giant BPS wordmark
+  Logo.tsx          SVG gold-triangle mark + wordmark
+  AnimatedText/Reveal/Magnetic/Counter  motion helpers
+public/images/      Drop final generated images here (see its README)
 ```
 
 ## Custom images
 
-The Geography cards currently use Unsplash placeholders. Replace them with your
-own generated images in `/public/images/` and swap the `image:` paths in
-`components/Geography.tsx`. See `public/images/README.md` for filenames.
+Geography cards use Unsplash placeholders. Replace with your own images in
+`/public/images/` and switch the `image:` paths in `components/Geography.tsx`
+to local `/images/...` paths. See `public/images/README.md` for exact filenames.
