@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #080807;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body {
+  background-color: var(--bg);
+  color: #f4f2ee;
+}
+
+/* Hide the native cursor on devices that have a fine pointer (custom cursor takes over) */
+@media (hover: hover) and (pointer: fine) {
+  body.has-custom-cursor,
+  body.has-custom-cursor * {
+    cursor: none !important;
+  }
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+::selection {
+  background: rgba(212, 175, 55, 0.28);
+  color: #fff2cd;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #080807;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#d4af37, #8c6e1c);
+  border-radius: 999px;
+}
+
+@layer base {
+  body {
+    @apply bg-ink font-sans text-white antialiased;
+  }
+}
+
+@layer components {
+  .gold-text {
+    @apply bg-gold-sheen bg-clip-text text-transparent;
+    background-size: 200% auto;
+  }
+  .gold-text-anim {
+    @apply gold-text animate-sheen;
+  }
+
+  .container-bps {
+    @apply mx-auto w-full max-w-[1280px] px-6 md:px-10;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.3em] text-gold-300;
+  }
+
+  .glass-card {
+    @apply relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] backdrop-blur-sm;
+  }
+
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent;
+  }
+
+  .section-num {
+    @apply font-mono text-[11px] uppercase tracking-[0.3em] text-gold-400/70;
+  }
+}
+
+/* ---------- background utilities ---------- */
+.bg-grid {
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.022) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.bg-dots {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 26px 26px;
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.gold-glow {
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.18),
+    0 24px 70px -22px rgba(212, 175, 55, 0.4);
+}
+
+.mask-fade-b {
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+.mask-fade-x {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
+
+/* line draw for divider accents */
+.text-stroke-gold {
+  -webkit-text-stroke: 1px rgba(212, 175, 55, 0.35);
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
