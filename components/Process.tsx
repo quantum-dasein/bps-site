@@ -42,8 +42,13 @@ const steps = [
 /** SVG radar used until /images/methodology-radar.png is provided. */
 function RadarFallback() {
   return (
-    <div className="relative flex h-full w-full items-center justify-center">
-      <svg viewBox="0 0 400 300" className="h-full w-full" aria-hidden="true">
+    <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
+      <svg
+        viewBox="0 0 400 300"
+        preserveAspectRatio="xMidYMid meet"
+        className="h-full w-full"
+        aria-hidden="true"
+      >
         <defs>
           <radialGradient id="rad-core" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#FFF2CD" />
@@ -56,8 +61,8 @@ function RadarFallback() {
           stroke="rgba(201,166,70,0.35)"
           fill="none"
         >
-          {[40, 75, 110, 145].map((r) => (
-            <ellipse key={r} rx={r * 1.5} ry={r * 0.62} strokeWidth="1" />
+          {[40, 75, 110, 130].map((r) => (
+            <ellipse key={r} rx={r * 1.25} ry={r * 0.6} strokeWidth="1" />
           ))}
           {/* connecting spokes */}
           <line x1="-200" y1="0" x2="200" y2="0" strokeWidth="0.6" />
@@ -146,35 +151,30 @@ export default function Process() {
           </Reveal>
         </div>
 
-        <div className="relative mt-16">
-          <div className="pointer-events-none absolute left-0 top-[3.25rem] hidden h-px w-full bg-gradient-to-r from-transparent via-gold-400/30 to-transparent lg:block" />
-
-          <div className="grid gap-px overflow-hidden rounded-3xl border border-[var(--border)] lg:grid-cols-4 lg:gap-0 lg:rounded-none lg:border-0">
-            {steps.map((s, i) => (
-              <Reveal key={s.n} delay={i * 0.08}>
-                <div className="group relative h-full bg-white/[0.012] p-8 lg:bg-transparent lg:px-5 lg:py-0">
-                  <div className="mb-6 flex items-center gap-4">
-                    <span className="font-mono text-3xl text-white/15">
-                      {s.n}
-                    </span>
-                    <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--border-gold)] bg-ink text-gold-200 transition-all duration-300 group-hover:-translate-y-1 group-hover:border-gold-400/60">
-                      <s.icon size={22} />
-                    </div>
+        <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((s, i) => (
+            <Reveal key={s.n} delay={i * 0.08} className="h-full">
+              <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-white/[0.025] p-7 transition-colors duration-300 hover:border-gold-400/35">
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gold-gradient text-black shadow-[0_8px_24px_-8px_rgba(201,166,70,0.6)] transition-transform duration-300 group-hover:-translate-y-1">
+                    <s.icon size={22} />
                   </div>
-                  <h3 className="font-display text-xl font-semibold text-white">
-                    {s.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
-                    {s.text}
-                  </p>
-                  <ArrowRight
-                    size={18}
-                    className="mt-5 text-gold-400/60 transition-transform duration-300 group-hover:translate-x-1"
-                  />
+                  <span className="font-mono text-2xl text-white/15">{s.n}</span>
                 </div>
-              </Reveal>
-            ))}
-          </div>
+                <h3 className="font-display text-lg font-semibold text-white">
+                  {s.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
+                  {s.text}
+                </p>
+                <ArrowRight
+                  size={18}
+                  className="mt-5 text-gold-400/70 transition-transform duration-300 group-hover:translate-x-1"
+                />
+                <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-gold-400/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+              </div>
+            </Reveal>
+          ))}
         </div>
 
         <Reveal delay={0.1}>

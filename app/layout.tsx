@@ -6,10 +6,15 @@ import {
   JetBrains_Mono,
 } from "next/font/google";
 import "./globals.css";
+import dynamic from "next/dynamic";
 import SmoothScroll from "@/components/SmoothScroll";
 import Cursor from "@/components/Cursor";
 import ScrollProgress from "@/components/ScrollProgress";
 import Preloader from "@/components/Preloader";
+
+const BackgroundFX = dynamic(() => import("@/components/BackgroundFX"), {
+  ssr: false,
+});
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -72,6 +77,8 @@ export default function RootLayout({
       className={`${inter.variable} ${manrope.variable} ${playfair.variable} ${mono.variable}`}
     >
       <body className="bg-ink font-sans antialiased">
+        <div className="bg-aurora" aria-hidden />
+        <BackgroundFX />
         <Preloader />
         <Cursor />
         <ScrollProgress />

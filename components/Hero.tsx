@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import Magnetic from "./Magnetic";
@@ -46,11 +46,21 @@ export default function Hero() {
   // Use full WebGL only on capable, motion-friendly desktops; otherwise the
   // lightweight SVG fallback keeps mobile fast and respects reduced-motion.
   const [use3D, setUse3D] = useState(false);
+  // mouse parallax for the hero visual (desktop only)
+  const px = useSpring(0, { stiffness: 60, damping: 18, mass: 0.4 });
+  const py = useSpring(0, { stiffness: 60, damping: 18, mass: 0.4 });
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const big = window.matchMedia("(min-width: 768px)").matches;
     setUse3D(big && !reduce);
-  }, []);
+    if (reduce || !big) return;
+    const onMove = (e: PointerEvent) => {
+      px.set((e.clientX / window.innerWidth - 0.5) * 36);
+      py.set((e.clientY / window.innerHeight - 0.5) * 28);
+    };
+    window.addEventListener("pointermove", onMove);
+    return () => window.removeEventListener("pointermove", onMove);
+  }, [px, py]);
 
   return (
     <section
@@ -68,16 +78,19 @@ export default function Hero() {
         style={{ y: sceneY, opacity: fadeOut }}
         className="absolute inset-0 z-10 md:left-[38%]"
       >
-        <AutoImage
-          src="/images/hero-pyramid.png"
-          alt="Золотая призма BPS"
-          className="h-full w-full object-cover object-center"
-          fallback={use3D ? <PyramidScene /> : <PrismFallback />}
-        />
+        <motion.div style={{ x: px, y: py }} className="h-full w-full scale-110">
+          <AutoImage
+            src="/images/hero-pyramid.png"
+            alt="Золотая призма BPS"
+            className="h-full w-full object-cover object-center"
+            fallback={use3D ? <PyramidScene /> : <PrismFallback />}
+          />
+        </motion.div>
       </motion.div>
 
-      {/* legibility scrim over the scene on small screens */}
-      <div className="pointer-events-none absolute inset-0 z-[15] bg-gradient-to-b from-ink/70 via-ink/30 to-ink md:hidden" />
+      {/* legibility scrim over the scene on small screens (keeps the headline
+          readable while the gold pyramid glows behind the lower half) */}
+      <div className="pointer-events-none absolute inset-0 z-[15] bg-gradient-to-b from-ink via-ink/55 to-ink/85 md:hidden" />
 
       <motion.div
         style={{ y: textY }}

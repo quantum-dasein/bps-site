@@ -299,6 +299,55 @@ html.lenis body {
   color: transparent;
 }
 
+/* animated ambient aurora behind everything (subtle moving gold light) */
+.bg-aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -20;
+  overflow: hidden;
+  pointer-events: none;
+}
+.bg-aurora::before,
+.bg-aurora::after {
+  content: "";
+  position: absolute;
+  width: 65vw;
+  height: 65vw;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.5;
+}
+.bg-aurora::before {
+  background: radial-gradient(circle, rgba(201, 166, 70, 0.16), transparent 65%);
+  top: -10%;
+  left: -5%;
+  animation: aurora1 22s ease-in-out infinite;
+}
+.bg-aurora::after {
+  background: radial-gradient(circle, rgba(150, 110, 40, 0.14), transparent 65%);
+  bottom: -15%;
+  right: -10%;
+  animation: aurora2 26s ease-in-out infinite;
+}
+@keyframes aurora1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(18vw, 12vh) scale(1.18);
+  }
+}
+@keyframes aurora2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1.1);
+  }
+  50% {
+    transform: translate(-16vw, -10vh) scale(0.92);
+  }
+}
+
 /* radar scan sweep (Geography panel) */
 @keyframes scan {
   0% {
