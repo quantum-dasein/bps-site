@@ -1,8 +1,10 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Reveal from "./Reveal";
 import AnimatedText from "./AnimatedText";
-import AutoImage from "./AutoImage";
+
+const Radar3D = dynamic(() => import("./Radar3D"), { ssr: false });
 import {
   ScanSearch,
   Crosshair,
@@ -39,76 +41,6 @@ const steps = [
   },
 ];
 
-/** SVG radar used until /images/methodology-radar.png is provided. */
-function RadarFallback() {
-  return (
-    <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
-      <svg
-        viewBox="0 0 400 300"
-        preserveAspectRatio="xMidYMid meet"
-        className="h-full w-full"
-        aria-hidden="true"
-      >
-        <defs>
-          <radialGradient id="rad-core" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#FFF2CD" />
-            <stop offset="60%" stopColor="#D4AF37" />
-            <stop offset="100%" stopColor="#8C6E1C" />
-          </radialGradient>
-        </defs>
-        <g
-          transform="translate(200 150)"
-          stroke="rgba(201,166,70,0.35)"
-          fill="none"
-        >
-          {[40, 75, 110, 130].map((r) => (
-            <ellipse key={r} rx={r * 1.25} ry={r * 0.6} strokeWidth="1" />
-          ))}
-          {/* connecting spokes */}
-          <line x1="-200" y1="0" x2="200" y2="0" strokeWidth="0.6" />
-          <line x1="0" y1="-95" x2="0" y2="95" strokeWidth="0.6" />
-        </g>
-        {/* candidate nodes */}
-        {[
-          [120, 70],
-          [285, 120],
-          [250, 215],
-          [110, 205],
-          [320, 60],
-        ].map(([x, y], i) => (
-          <g key={i}>
-            <circle cx={x} cy={y} r="4" fill="#E4C96A">
-              <animate
-                attributeName="opacity"
-                values="0.4;1;0.4"
-                dur={`${2.5 + i * 0.4}s`}
-                repeatCount="indefinite"
-              />
-            </circle>
-            <circle cx={x} cy={y} r="9" fill="none" stroke="rgba(201,166,70,0.3)" />
-          </g>
-        ))}
-        {/* center */}
-        <circle cx="200" cy="150" r="11" fill="url(#rad-core)" />
-        <circle cx="200" cy="150" r="20" fill="none" stroke="rgba(201,166,70,0.4)">
-          <animate
-            attributeName="r"
-            values="14;40"
-            dur="3s"
-            repeatCount="indefinite"
-          />
-          <animate
-            attributeName="opacity"
-            values="0.6;0"
-            dur="3s"
-            repeatCount="indefinite"
-          />
-        </circle>
-      </svg>
-    </div>
-  );
-}
-
 export default function Process() {
   return (
     <section id="process" className="section-pad relative overflow-hidden">
@@ -136,16 +68,11 @@ export default function Process() {
             </Reveal>
           </div>
 
-          {/* radar visual (image slot with graceful fallback) */}
+          {/* interactive 3D radar (falls back to image / SVG on mobile + reduced-motion) */}
           <Reveal delay={0.15}>
             <div className="relative aspect-square w-full lg:-my-10 lg:scale-110">
               <div className="glow-pool inset-[6%]" />
-              <AutoImage
-                src="/images/methodology-radar.png"
-                alt="Целевой поиск кандидатов"
-                className="relative h-full w-full object-contain"
-                fallback={<RadarFallback />}
-              />
+              <Radar3D className="relative h-full w-full" />
             </div>
           </Reveal>
         </div>

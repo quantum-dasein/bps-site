@@ -166,6 +166,8 @@ function GlobeGroup() {
 
 export default function Globe3D({ className = "" }: { className?: string }) {
   const [mode, setMode] = useState<"loading" | "3d" | "fallback">("loading");
+  const [visible, setVisible] = useState(false);
+  const wrap = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -174,7 +176,17 @@ export default function Globe3D({ className = "" }: { className?: string }) {
     setMode((reduce || small) && !force ? "fallback" : "3d");
   }, []);
 
-  if (mode === "loading") return null;
+  useEffect(() => {
+    if (mode !== "3d" || !wrap.current) return;
+    const io = new IntersectionObserver(
+      ([e]) => setVisible(e.isIntersecting),
+      { rootMargin: "300px 0px" }
+    );
+    io.observe(wrap.current);
+    return () => io.disconnect();
+  }, [mode]);
+
+  if (mode === "loading") return <div className={className} ref={wrap} />;
 
   if (mode === "fallback") {
     return (
@@ -185,26 +197,28 @@ export default function Globe3D({ className = "" }: { className?: string }) {
   }
 
   return (
-    <div className={className}>
-      <Canvas
-        camera={{ position: [0, 0, 3.1], fov: 42 }}
-        dpr={[1, 1.8]}
-        gl={{ alpha: true, antialias: true }}
-      >
-        <Suspense fallback={null}>
-          <ambientLight intensity={0.6} />
-          <pointLight position={[3, 2, 4]} intensity={2} color="#FFF2CD" />
-          <GlobeGroup />
-          <EffectComposer>
-            <Bloom
-              intensity={1.1}
-              luminanceThreshold={0.4}
-              luminanceSmoothing={0.3}
-              mipmapBlur
-            />
-          </EffectComposer>
-        </Suspense>
-      </Canvas>
+    <div className={className} ref={wrap}>
+      {visible && (
+        <Canvas
+          camera={{ position: [0, 0, 3.1], fov: 42 }}
+          dpr={[1, 1.8]}
+          gl={{ alpha: true, antialias: true }}
+        >
+          <Suspense fallback={null}>
+            <ambientLight intensity={0.6} />
+            <pointLight position={[3, 2, 4]} intensity={2} color="#FFF2CD" />
+            <GlobeGroup />
+            <EffectComposer>
+              <Bloom
+                intensity={1.1}
+                luminanceThreshold={0.4}
+                luminanceSmoothing={0.3}
+                mipmapBlur
+              />
+            </EffectComposer>
+          </Suspense>
+        </Canvas>
+      )}
     </div>
   );
 }

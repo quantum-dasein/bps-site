@@ -8,6 +8,7 @@ import Expertise from "@/components/Expertise";
 import Process from "@/components/Process";
 import WhyUs from "@/components/WhyUs";
 import Footer from "@/components/Footer";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Home() {
   return (
@@ -15,12 +16,24 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Marquee />
-      <About />
-      <Stats />
-      <Geography />
-      <Expertise />
-      <Process />
-      <WhyUs />
+      <ScrollReveal>
+        <About />
+      </ScrollReveal>
+      <ScrollReveal>
+        <Stats />
+      </ScrollReveal>
+      <ScrollReveal>
+        <Geography />
+      </ScrollReveal>
+      <ScrollReveal>
+        <Expertise />
+      </ScrollReveal>
+      <ScrollReveal>
+        <Process />
+      </ScrollReveal>
+      <ScrollReveal>
+        <WhyUs />
+      </ScrollReveal>
       <Footer />
     </main>
   );
