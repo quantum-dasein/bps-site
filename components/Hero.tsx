@@ -86,6 +86,8 @@ export default function Hero() {
             fallback={use3D ? <PyramidScene /> : <PrismFallback />}
           />
         </motion.div>
+        {/* blend the image left edge into the dark text side (desktop) */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-2/5 bg-gradient-to-r from-ink via-ink/70 to-transparent md:block" />
       </motion.div>
 
       {/* legibility scrim over the scene on small screens (keeps the headline

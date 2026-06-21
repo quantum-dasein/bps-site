@@ -21,16 +21,12 @@ export default function Footer() {
         </div>
 
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* left: heading + contact cards + ambient globe */}
+          {/* left: heading + contact cards + large ambient globe */}
           <div className="relative">
-            <div className="glow-pool -right-24 top-10 hidden h-72 w-72 lg:block" />
-            {/* globe visual slot (renders only if the file exists) */}
-            <div className="pointer-events-none absolute -right-10 top-0 hidden w-[55%] opacity-70 lg:block">
-              <AutoImage
-                src="/images/contact-globe.png"
-                alt=""
-                className="w-full"
-              />
+            <div className="glow-pool -left-[10%] top-[15%] hidden h-[34rem] w-[34rem] lg:block" />
+            {/* globe visual slot (renders only if the file exists) — large, bleeds left */}
+            <div className="pointer-events-none absolute -left-[18%] top-[6%] hidden w-[118%] max-w-[760px] opacity-60 mix-blend-screen lg:block">
+              <AutoImage src="/images/contact-globe.png" alt="" className="w-full" />
             </div>
 
             <h2 className="t-h2 relative text-white">

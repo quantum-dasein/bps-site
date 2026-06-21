@@ -119,7 +119,7 @@ export default function Process() {
           <span className="section-num hidden md:block">Precision Search</span>
         </div>
 
-        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1fr]">
+        <div className="grid items-center gap-8 lg:grid-cols-[0.82fr_1.18fr]">
           {/* heading + copy */}
           <div>
             <h2 className="t-h2 text-white">
@@ -139,8 +139,8 @@ export default function Process() {
 
           {/* radar visual (image slot with graceful fallback) */}
           <Reveal delay={0.15}>
-            <div className="relative aspect-[4/3] w-full">
-              <div className="glow-pool inset-[10%]" />
+            <div className="relative aspect-square w-full lg:-my-10 lg:scale-110">
+              <div className="glow-pool inset-[6%]" />
               <AutoImage
                 src="/images/methodology-radar.png"
                 alt="Целевой поиск кандидатов"
@@ -169,7 +169,7 @@ export default function Process() {
                 </p>
                 <ArrowRight
                   size={18}
-                  className="mt-5 text-gold-400/70 transition-transform duration-300 group-hover:translate-x-1"
+                  className="mt-auto pt-6 text-gold-400/70 transition-transform duration-300 group-hover:translate-x-1"
                 />
                 <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-gold-400/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
               </div>
