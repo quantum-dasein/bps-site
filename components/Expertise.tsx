@@ -59,7 +59,9 @@ export default function Expertise() {
             <Reveal key={s.n} delay={i * 0.06}>
               <div
                 data-cursor="hover"
-                className="group relative grid grid-cols-1 items-start gap-5 border-b border-white/[0.08] py-10 transition-colors duration-500 md:grid-cols-[auto_1fr_2fr] md:gap-12 md:py-12"
+                className={`group relative grid grid-cols-1 items-start gap-5 py-10 transition-colors duration-500 md:grid-cols-[auto_1fr_2fr] md:gap-12 md:py-12 ${
+                  i < services.length - 1 ? "border-b border-white/[0.08]" : ""
+                }`}
               >
                 <span className="font-mono text-sm text-gold-400/70">{s.n}</span>
 

@@ -1,14 +1,10 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import Magnetic from "./Magnetic";
-import PrismFallback from "./PrismFallback";
 import AutoImage from "./AutoImage";
-
-const PyramidScene = dynamic(() => import("./PyramidScene"), { ssr: false });
 
 const LINE_DELAY = 2.45; // start after the preloader has exited
 
@@ -43,16 +39,12 @@ export default function Hero() {
   const sceneY = useTransform(scrollYProgress, [0, 1], [0, 90]);
   const fadeOut = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  // Use full WebGL only on capable, motion-friendly desktops; otherwise the
-  // lightweight SVG fallback keeps mobile fast and respects reduced-motion.
-  const [use3D, setUse3D] = useState(false);
   // mouse parallax for the hero visual (desktop only)
   const px = useSpring(0, { stiffness: 60, damping: 18, mass: 0.4 });
   const py = useSpring(0, { stiffness: 60, damping: 18, mass: 0.4 });
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const big = window.matchMedia("(min-width: 768px)").matches;
-    setUse3D(big && !reduce);
     if (reduce || !big) return;
     const onMove = (e: PointerEvent) => {
       px.set((e.clientX / window.innerWidth - 0.5) * 36);
@@ -73,22 +65,33 @@ export default function Hero() {
       <div className="pointer-events-none absolute left-[42%] top-1/2 h-[60vw] w-[60vw] -translate-x-1/2 -translate-y-1/2 animate-pulseGlow rounded-full bg-radial-fade blur-3xl" />
       <div className="pointer-events-none absolute inset-0 bg-grain opacity-[0.04] mix-blend-overlay" />
 
-      {/* 3D prism (WebGL on capable desktops, SVG fallback otherwise) */}
+      {/* Hero gold pyramid — blended into the scene with edge fades + glow */}
       <motion.div
         style={{ y: sceneY, opacity: fadeOut }}
-        className="absolute inset-0 z-10 md:left-[38%]"
+        className="absolute inset-0 z-10 md:left-[34%]"
       >
-        <motion.div style={{ x: px, y: py }} className="h-full w-full scale-110">
+        <motion.div
+          style={{ x: px, y: py }}
+          className="relative h-full w-full scale-110"
+        >
           <AutoImage
             src="/images/hero-pyramid.png"
             alt="Золотая призма BPS"
             className="h-full w-full object-cover object-center"
-            fallback={use3D ? <PyramidScene /> : <PrismFallback />}
+            fallback={
+              <div className="absolute left-1/2 top-1/2 h-[55%] w-[55%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-radial-fade blur-3xl" />
+            }
           />
         </motion.div>
-        {/* blend the image left edge into the dark text side (desktop) */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-2/5 bg-gradient-to-r from-ink via-ink/70 to-transparent md:block" />
+
+        {/* edge fades so the image melts into the dark page (no pasted-rectangle look) */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-ink via-ink/65 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-ink to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink via-ink/60 to-transparent" />
       </motion.div>
+
+      {/* warm light the pyramid casts into the dark text side */}
+      <div className="pointer-events-none absolute left-[20%] top-1/2 z-[11] hidden h-[55vw] w-[55vw] -translate-x-1/2 -translate-y-1/2 animate-pulseGlow rounded-full bg-radial-fade mix-blend-screen blur-3xl md:block" />
 
       {/* legibility scrim over the scene on small screens (keeps the headline
           readable while the gold pyramid glows behind the lower half) */}

@@ -3,9 +3,11 @@
 import Reveal from "./Reveal";
 import AnimatedText from "./AnimatedText";
 import Logo, { LogoMark } from "./Logo";
+import dynamic from "next/dynamic";
 import ContactForm from "./ContactForm";
-import AutoImage from "./AutoImage";
 import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+
+const Globe3D = dynamic(() => import("./Globe3D"), { ssr: false });
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -21,13 +23,12 @@ export default function Footer() {
         </div>
 
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* left: heading + contact cards + large ambient globe */}
+          {/* left: heading + contact cards + interactive 3D globe */}
           <div className="relative">
-            <div className="glow-pool -left-[10%] top-[15%] hidden h-[34rem] w-[34rem] lg:block" />
-            {/* globe visual slot (renders only if the file exists) — large, bleeds left */}
-            <div className="pointer-events-none absolute -left-[18%] top-[6%] hidden w-[118%] max-w-[760px] opacity-60 mix-blend-screen lg:block">
-              <AutoImage src="/images/contact-globe.png" alt="" className="w-full" />
-            </div>
+            <div className="glow-pool -left-[12%] bottom-0 hidden h-[32rem] w-[32rem] lg:block" />
+            {/* interactive 3D globe — sits in the lower area, behind the cards,
+                so it never covers the heading text */}
+            <Globe3D className="pointer-events-none absolute bottom-0 left-[-6%] hidden aspect-square w-[88%] max-w-[460px] translate-y-[14%] lg:block" />
 
             <h2 className="t-h2 relative text-white">
               <AnimatedText

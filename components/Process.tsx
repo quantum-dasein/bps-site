@@ -112,7 +112,6 @@ function RadarFallback() {
 export default function Process() {
   return (
     <section id="process" className="section-pad relative overflow-hidden">
-      <div className="hairline absolute inset-x-0 top-0" />
       <div className="container-bps">
         <div className="mb-14 flex items-center justify-between">
           <span className="section-num">04 — Методология</span>
