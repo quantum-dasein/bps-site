@@ -15,13 +15,13 @@ export default function Footer() {
 
       <div className="container-bps relative">
         <div className="mb-14 flex items-center justify-between">
-          <span className="section-num">05 — Контакты</span>
+          <span className="section-num">06 — Контакты</span>
           <span className="section-num hidden md:block">Ташкент, UZ</span>
         </div>
 
         <div className="grid gap-14 lg:grid-cols-2">
           <div>
-            <h2 className="font-display text-[2.8rem] font-bold leading-[1.02] tracking-tightest text-white md:text-[4.2rem]">
+            <h2 className="t-h2 text-white">
               <AnimatedText
                 text="Давайте усилим вашу команду"
                 highlight="команду"
@@ -119,7 +119,7 @@ export default function Footer() {
         <div className="relative mt-24 select-none">
           <div className="flex items-center justify-center gap-6 opacity-[0.9]">
             <LogoMark size={48} className="hidden sm:block" />
-            <span className="font-display text-[20vw] font-extrabold leading-none tracking-tightest text-stroke-gold md:text-[15rem]">
+            <span className="font-display text-[18vw] font-extrabold leading-none tracking-tightest text-stroke-gold md:text-[13rem]">
               BPS
             </span>
           </div>

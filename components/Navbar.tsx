@@ -10,8 +10,9 @@ const links = [
   { href: "#about", label: "О компании", num: "01" },
   { href: "#geography", label: "География", num: "02" },
   { href: "#expertise", label: "Направления", num: "03" },
-  { href: "#why", label: "Почему мы", num: "04" },
-  { href: "#contact", label: "Контакты", num: "05" },
+  { href: "#process", label: "Как мы работаем", num: "04" },
+  { href: "#why", label: "Почему мы", num: "05" },
+  { href: "#contact", label: "Контакты", num: "06" },
 ];
 
 export default function Navbar() {
@@ -43,7 +44,7 @@ export default function Navbar() {
           <Logo />
         </a>
 
-        <nav className="hidden items-center gap-9 lg:flex">
+        <nav className="hidden items-center gap-7 xl:flex">
           {links.map((l) => (
             <a
               key={l.href}
@@ -60,7 +61,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <Magnetic strength={0.5} className="hidden lg:block">
+        <Magnetic strength={0.5} className="hidden xl:block">
           <a
             href="#contact"
             data-cursor="hover"
@@ -72,7 +73,7 @@ export default function Navbar() {
 
         <button
           aria-label="Меню"
-          className="text-white lg:hidden"
+          className="text-white xl:hidden"
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <X size={24} /> : <Menu size={24} />}
@@ -85,7 +86,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="mx-auto mt-2 max-w-[1280px] overflow-hidden rounded-2xl border border-white/[0.07] bg-black/90 backdrop-blur-xl lg:hidden"
+            className="mx-auto mt-2 max-w-[1280px] overflow-hidden rounded-2xl border border-white/[0.07] bg-black/90 backdrop-blur-xl xl:hidden"
           >
             <nav className="flex flex-col p-4">
               {links.map((l) => (

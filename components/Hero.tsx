@@ -2,9 +2,10 @@
 
 import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowDown, ShieldCheck } from "lucide-react";
 import Magnetic from "./Magnetic";
+import PrismFallback from "./PrismFallback";
 
 const PyramidScene = dynamic(() => import("./PyramidScene"), { ssr: false });
 
@@ -41,6 +42,15 @@ export default function Hero() {
   const sceneY = useTransform(scrollYProgress, [0, 1], [0, 90]);
   const fadeOut = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
+  // Use full WebGL only on capable, motion-friendly desktops; otherwise the
+  // lightweight SVG fallback keeps mobile fast and respects reduced-motion.
+  const [use3D, setUse3D] = useState(false);
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const big = window.matchMedia("(min-width: 768px)").matches;
+    setUse3D(big && !reduce);
+  }, []);
+
   return (
     <section
       id="hero"
@@ -48,16 +58,16 @@ export default function Hero() {
       className="relative flex min-h-[100svh] items-center overflow-hidden"
     >
       {/* background layers */}
-      <div className="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-60" />
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[70vw] w-[70vw] -translate-x-1/2 -translate-y-1/2 animate-pulseGlow rounded-full bg-radial-fade blur-3xl" />
-      <div className="pointer-events-none absolute inset-0 bg-noise opacity-[0.035] mix-blend-overlay" />
+      <div className="pointer-events-none absolute inset-0 bg-faint-grid mask-fade-b opacity-40" />
+      <div className="pointer-events-none absolute left-[42%] top-1/2 h-[60vw] w-[60vw] -translate-x-1/2 -translate-y-1/2 animate-pulseGlow rounded-full bg-radial-fade blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 bg-grain opacity-[0.04] mix-blend-overlay" />
 
-      {/* 3D prism */}
+      {/* 3D prism (WebGL on capable desktops, SVG fallback otherwise) */}
       <motion.div
         style={{ y: sceneY, opacity: fadeOut }}
         className="absolute inset-0 z-10 md:left-[38%]"
       >
-        <PyramidScene />
+        {use3D ? <PyramidScene /> : <PrismFallback />}
       </motion.div>
 
       {/* legibility scrim over the scene on small screens */}
@@ -65,7 +75,7 @@ export default function Hero() {
 
       <motion.div
         style={{ y: textY }}
-        className="container-bps relative z-20 grid items-center gap-10 pt-28 md:grid-cols-2 md:pt-0"
+        className="container-bps relative z-20 my-auto grid items-center gap-10 pt-28 md:grid-cols-[1.1fr_0.9fr] md:pt-0"
       >
         <div>
           <motion.div
@@ -79,7 +89,7 @@ export default function Hero() {
             <span className="eyebrow">Executive Search &amp; Recruitment</span>
           </motion.div>
 
-          <h1 className="font-display text-[13vw] font-extrabold leading-[0.95] tracking-tightest text-white sm:text-6xl lg:text-[5.4rem]">
+          <h1 className="t-display text-white">
             {["Сильные кадры", "для точек роста"].map((line, i) => (
               <span key={i} className="block overflow-hidden">
                 <motion.span
@@ -111,13 +121,11 @@ export default function Hero() {
             variants={fade}
             initial="hidden"
             animate="show"
-            className="mt-8 max-w-xl text-base leading-relaxed text-white/60 md:text-lg"
+            className="mt-8 max-w-[34rem] t-lead text-[var(--muted)]"
           >
-            <span className="font-semibold text-white">
-              BEST PRACTICE SOLUTION
-            </span>{" "}
-            — агентство Executive Search &amp; Recruitment. Работаем строго в
-            сегменте B2B и закрываем сложные, дефицитные и руководящие позиции.
+            Executive Search &amp; Recruitment для B2B-компаний, которым нужно
+            закрыть сложные, конфиденциальные и руководящие позиции в ключевых
+            регионах роста.
           </motion.p>
 
           <motion.div

@@ -4,15 +4,14 @@ Drop your final generated images here using these EXACT filenames, then update
 the matching `image:` URL in `components/Geography.tsx` from the Unsplash link
 to the local path (e.g. `image: "/images/uae-office.webp"`).
 
-Generate at ~1600×2000 px (portrait, the cards are taller than wide), export as
-.webp for small file size.
+Generate at ~1600×2000 px (portrait). Save as PNG (ChatGPT default) — that works fine.
 
 | Filename             | Used for                         | Where to wire it                         |
 |----------------------|----------------------------------|------------------------------------------|
-| `cis-market.webp`    | СНГ region card                  | Geography.tsx → regions[0].image         |
-| `uae-office.webp`    | ОАЭ region card                  | Geography.tsx → regions[1].image         |
-| `asia-market.webp`   | Китай и Индия region card        | Geography.tsx → regions[2].image         |
-| `hero-bg.webp`       | (optional) ambient hero backdrop | Hero.tsx background layer                 |
+| `cis-market.png`     | СНГ region card                  | Geography.tsx → regions[0].image         |
+| `uae-office.png`     | ОАЭ region card                  | Geography.tsx → regions[1].image         |
+| `asia-market.png`    | Китай и Индия region card        | Geography.tsx → regions[2].image         |
+| `hero-bg.png`        | (optional) ambient hero backdrop | Hero.tsx background layer                 |
 
 ## Optional: use your real logo
 

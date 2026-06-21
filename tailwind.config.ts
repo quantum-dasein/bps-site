@@ -9,20 +9,20 @@ const config: Config = {
     extend: {
       colors: {
         ink: {
-          DEFAULT: "#080807",
-          900: "#0A0A0A",
-          800: "#0E0E0F",
-          card: "#121211",
-          line: "#1C1C1A",
+          DEFAULT: "#040403",
+          900: "#070706",
+          800: "#0B0B09",
+          card: "#100F0D",
+          line: "#1A1916",
         },
         gold: {
-          50: "#FFF8E6",
-          100: "#FFF2CD",
-          200: "#F2E1A6",
-          300: "#E4C97A",
-          400: "#D4AF37",
-          500: "#BE9A2E",
-          deep: "#8C6E1C",
+          50: "#F7EFD6",
+          100: "#EBD9A0",
+          200: "#E4C96A",
+          300: "#D6B658",
+          400: "#C9A646",
+          500: "#A98B38",
+          deep: "#7D6525",
         },
       },
       fontFamily: {
@@ -36,11 +36,11 @@ const config: Config = {
       },
       backgroundImage: {
         "gold-gradient":
-          "linear-gradient(135deg, #FFF2CD 0%, #D4AF37 48%, #8C6E1C 100%)",
+          "linear-gradient(135deg, #EBD9A0 0%, #C9A646 50%, #7D6525 100%)",
         "gold-sheen":
-          "linear-gradient(110deg, #8C6E1C 0%, #D4AF37 20%, #FFF2CD 48%, #D4AF37 76%, #8C6E1C 100%)",
+          "linear-gradient(110deg, #7D6525 0%, #C9A646 22%, #F2E6C2 50%, #C9A646 78%, #7D6525 100%)",
         "radial-fade":
-          "radial-gradient(60% 60% at 50% 40%, rgba(212,175,55,0.14), transparent 70%)",
+          "radial-gradient(60% 60% at 50% 40%, rgba(201,166,70,0.12), transparent 70%)",
       },
       keyframes: {
         sheen: {

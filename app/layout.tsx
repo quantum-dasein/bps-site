@@ -59,7 +59,7 @@ export default function RootLayout({
       lang="ru"
       className={`${inter.variable} ${manrope.variable} ${mono.variable}`}
     >
-      <body className="bg-ink font-sans text-white antialiased">
+      <body className="bg-ink font-sans antialiased">
         <Preloader />
         <Cursor />
         <ScrollProgress />

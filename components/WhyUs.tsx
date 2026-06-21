@@ -2,7 +2,7 @@
 
 import Reveal from "./Reveal";
 import AnimatedText from "./AnimatedText";
-import { Clock, MapPinned, Lock, ArrowRight } from "lucide-react";
+import { Clock, MapPinned, Lock, UserSearch, ArrowRight } from "lucide-react";
 
 const reasons = [
   {
@@ -20,20 +20,25 @@ const reasons = [
     title: "Конфиденциальность",
     text: "Часто замена топ-менеджера или открытие нового направления должны оставаться в тайне от рынка и конкурентов. BPS проводит поиск строго конфиденциально.",
   },
+  {
+    icon: UserSearch,
+    title: "Работа с пассивными кандидатами",
+    text: "Мы выходим на сильных специалистов, которые не размещают резюме и не откликаются на вакансии — но рассматривают точечные предложения.",
+  },
 ];
 
 export default function WhyUs() {
   return (
-    <section id="why" className="relative py-28 md:py-36">
+    <section id="why" className="section-pad relative">
       <div className="container-bps">
         <div className="mb-14 flex items-center justify-between">
-          <span className="section-num">04 — Почему мы</span>
+          <span className="section-num">05 — Почему мы</span>
           <span className="section-num hidden md:block">Стратегический партнер</span>
         </div>
 
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <h2 className="font-display text-[2.4rem] font-bold leading-[1.05] tracking-tightest text-white md:text-[3.2rem]">
+            <h2 className="t-h2 text-white">
               <AnimatedText
                 text="Почему компании обращаются в BPS?"
                 highlight="BPS?"

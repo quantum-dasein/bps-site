@@ -10,27 +10,27 @@ const services = [
     icon: Crosshair,
     title: "Executive Search",
     sub: "Хедхантинг",
-    text: "Целевой поиск и переманивание топ-менеджеров, директоров и редких узкопрофильных специалистов, которые прямо сейчас не ищут работу, но готовы рассмотреть уникальное предложение.",
+    text: "Целевой поиск и привлечение топ-менеджеров, директоров и редких узкопрофильных специалистов, которые сейчас не ищут работу, но готовы рассмотреть уникальное предложение.",
   },
   {
     n: "02",
     icon: Globe2,
     title: "Международный рекрутинг",
     sub: "Cross-border Recruitment",
-    text: "Помощь компаниям в экспансии. Когда бизнесу из СНГ нужно открыть офис в Дубае или наладить закупки в Китае и Индии, BPS находит локальную команду, соответствующую международным стандартам.",
+    text: "Подбор команд и ключевых специалистов для рынков СНГ, ОАЭ, Китая, Индии и других регионов роста — когда бизнесу нужно открыть офис или наладить закупки за рубежом.",
   },
   {
     n: "03",
     icon: SearchCheck,
     title: "Глубокий скрининг и оценка",
     sub: "Screening & Assessment",
-    text: "Оценка кандидатов не только по резюме, но и по их реальным бизнес-кейсам, репутации на рынке и соответствию корпоративной культуре заказчика.",
+    text: "Оцениваем кандидатов не только по резюме, но и по реальному опыту, бизнес-кейсам, репутации на рынке и соответствию корпоративной культуре заказчика.",
   },
 ];
 
 export default function Expertise() {
   return (
-    <section id="expertise" className="relative py-28 md:py-36">
+    <section id="expertise" className="section-pad relative">
       <div className="hairline absolute inset-x-0 top-0" />
       <div className="container-bps">
         <div className="mb-14 flex items-center justify-between">
@@ -39,7 +39,7 @@ export default function Expertise() {
         </div>
 
         <div className="max-w-3xl">
-          <h2 className="font-display text-[2.6rem] font-bold leading-[1.05] tracking-tightest text-white md:text-[3.4rem]">
+          <h2 className="t-h2 text-white">
             <AnimatedText
               text="Подход, отличный от потокового подбора"
               highlight="потокового подбора"

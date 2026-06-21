@@ -2,6 +2,7 @@
 
 import Reveal from "./Reveal";
 import AnimatedText from "./AnimatedText";
+import Tilt from "./Tilt";
 import { Building2, UserX, Target } from "lucide-react";
 
 const points = [
@@ -24,7 +25,7 @@ const points = [
 
 export default function About() {
   return (
-    <section id="about" className="relative py-28 md:py-36">
+    <section id="about" className="section-pad relative">
       <div className="container-bps">
         <div className="mb-16 flex items-center justify-between">
           <span className="section-num">01 — О компании</span>
@@ -33,7 +34,7 @@ export default function About() {
 
         <div className="grid items-start gap-14 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <h2 className="font-display text-[2.6rem] font-bold leading-[1.05] tracking-tightest text-white md:text-[3.4rem]">
+            <h2 className="t-h2 text-white">
               <AnimatedText
                 text="Агентство, которое работает с лучшими практиками"
                 highlight="лучшими практиками"
@@ -59,21 +60,26 @@ export default function About() {
         <div className="mt-16 grid gap-4 md:grid-cols-3">
           {points.map((p, i) => (
             <Reveal key={p.title} delay={i * 0.08}>
-              <div
-                data-cursor="hover"
-                className="group relative h-full overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.015] p-7 transition-colors duration-300 hover:border-gold-400/30 md:p-8"
-              >
-                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border border-gold-400/20 bg-gold-400/5 text-gold-300 transition-transform duration-300 group-hover:-translate-y-1">
-                  <p.icon size={22} />
+              <Tilt className="h-full">
+                <div
+                  data-cursor="hover"
+                  className="group relative h-full overflow-hidden rounded-2xl border border-[var(--border)] bg-white/[0.015] p-7 transition-colors duration-300 hover:border-gold-400/30 md:p-8"
+                  style={{
+                    backgroundImage:
+                      "radial-gradient(220px circle at var(--mx,50%) var(--my,0%), rgba(201,166,70,0.10), transparent 60%)",
+                  }}
+                >
+                  <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border border-gold-400/20 bg-gold-400/5 text-gold-300 transition-transform duration-300 group-hover:-translate-y-1">
+                    <p.icon size={22} />
+                  </div>
+                  <h3 className="font-display text-xl font-semibold text-white">
+                    {p.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
+                    {p.text}
+                  </p>
                 </div>
-                <h3 className="font-display text-lg font-semibold text-white">
-                  {p.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/55">
-                  {p.text}
-                </p>
-                <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-gold-400/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
-              </div>
+              </Tilt>
             </Reveal>
           ))}
         </div>

@@ -5,6 +5,7 @@ import About from "@/components/About";
 import Stats from "@/components/Stats";
 import Geography from "@/components/Geography";
 import Expertise from "@/components/Expertise";
+import Process from "@/components/Process";
 import WhyUs from "@/components/WhyUs";
 import Footer from "@/components/Footer";
 
@@ -18,6 +19,7 @@ export default function Home() {
       <Stats />
       <Geography />
       <Expertise />
+      <Process />
       <WhyUs />
       <Footer />
     </main>

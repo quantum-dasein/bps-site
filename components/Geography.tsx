@@ -12,27 +12,21 @@ const regions = [
     tag: "СНГ",
     title: "СНГ",
     text: "Поиск специалистов с глубоким пониманием локальных рынков и регуляторики.",
-    // final asset: /images/cis-market.webp
-    image:
-      "https://images.unsplash.com/photo-1520106212299-d99c443e4568?q=80&w=1600&auto=format&fit=crop",
+    image: "/images/cis-market.jpg",
   },
   {
     id: "uae",
     tag: "Ближний Восток",
     title: "ОАЭ",
     text: "Подбор кадров для динамично растущего ближневосточного хаба, знающих специфику ведения бизнеса в Эмиратах.",
-    // final asset: /images/uae-office.webp
-    image:
-      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1600&auto=format&fit=crop",
+    image: "/images/uae-office.png",
   },
   {
     id: "asia",
     tag: "Азия",
     title: "Китай и Индия",
     text: "Работа на крупнейших производственных и технологических рынках мира, где критически важен доступ к местным базам кандидатов и знание культурных особенностей.",
-    // final asset: /images/asia-market.webp
-    image:
-      "https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?q=80&w=1600&auto=format&fit=crop",
+    image: "/images/asia-market.png",
   },
 ];
 
@@ -41,7 +35,7 @@ export default function Geography() {
   const current = regions[active];
 
   return (
-    <section id="geography" className="relative py-28 md:py-36">
+    <section id="geography" className="section-pad relative">
       <div className="container-bps">
         <div className="mb-14 flex items-center justify-between">
           <span className="section-num">02 — География</span>
@@ -49,7 +43,7 @@ export default function Geography() {
         </div>
 
         <div className="max-w-3xl">
-          <h2 className="font-display text-[2.6rem] font-bold leading-[1.05] tracking-tightest text-white md:text-[3.4rem]">
+          <h2 className="t-h2 text-white">
             <AnimatedText
               text="Международная экспертиза в ключевых регионах"
               highlight="ключевых регионах"
@@ -138,9 +132,23 @@ export default function Geography() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
               </motion.div>
             </AnimatePresence>
-            <div className="absolute inset-x-0 bottom-0 p-8">
+            {/* radar scan beam */}
+            <div className="pointer-events-none absolute inset-0 overflow-hidden">
+              <div className="absolute -inset-y-10 left-0 w-1/3 animate-[scan_4.5s_ease-in-out_infinite] bg-gradient-to-r from-transparent via-gold-200/12 to-transparent" />
+            </div>
+            {/* corner framing markers */}
+            <span className="pointer-events-none absolute left-4 top-4 h-5 w-5 border-l border-t border-gold-300/50" />
+            <span className="pointer-events-none absolute right-4 top-4 h-5 w-5 border-r border-t border-gold-300/50" />
+            <span className="pointer-events-none absolute bottom-4 left-4 h-5 w-5 border-b border-l border-gold-300/50" />
+            <span className="pointer-events-none absolute bottom-4 right-4 h-5 w-5 border-b border-r border-gold-300/50" />
+
+            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between p-8">
               <span className="inline-flex rounded-full border border-gold-400/30 bg-black/40 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-gold-200 backdrop-blur">
                 {current.tag}
+              </span>
+              <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold-300" />
+                Signal
               </span>
             </div>
             <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/5" />

@@ -49,7 +49,7 @@ export default function Preloader() {
             transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] },
           }}
         >
-          <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" />
+          <div className="pointer-events-none absolute inset-0 bg-faint-grid opacity-30" />
 
           <motion.svg
             width="58"
