@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Manrope, JetBrains_Mono } from "next/font/google";
+import {
+  Inter,
+  Manrope,
+  Playfair_Display,
+  JetBrains_Mono,
+} from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Cursor from "@/components/Cursor";
@@ -16,6 +21,13 @@ const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
   weight: ["500", "600", "700", "800"],
   variable: "--font-display",
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin", "cyrillic"],
+  weight: ["500", "600", "700", "800", "900"],
+  variable: "--font-serif",
   display: "swap",
 });
 
@@ -57,7 +69,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${inter.variable} ${manrope.variable} ${mono.variable}`}
+      className={`${inter.variable} ${manrope.variable} ${playfair.variable} ${mono.variable}`}
     >
       <body className="bg-ink font-sans antialiased">
         <Preloader />

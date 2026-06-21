@@ -92,25 +92,24 @@ html.lenis body {
 @layer components {
   /* ---------- fluid typography ---------- */
   .t-display {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(2.4rem, 5.4vw, 5.25rem);
-    line-height: 0.98;
-    letter-spacing: -0.04em;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: clamp(2.6rem, 5.6vw, 5.5rem);
+    line-height: 1;
+    letter-spacing: -0.01em;
   }
   .t-h2 {
-    font-family: var(--font-display);
+    font-family: var(--font-serif);
     font-weight: 700;
-    font-size: clamp(2rem, 4.6vw, 4.4rem);
-    line-height: 1.02;
-    letter-spacing: -0.035em;
+    font-size: clamp(2.1rem, 4.8vw, 4.6rem);
+    line-height: 1.04;
+    letter-spacing: -0.005em;
   }
   .t-h3 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(1.35rem, 2.6vw, 2.35rem);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 2.6vw, 2.35rem);
+    line-height: 1.1;
   }
   .t-lead {
     font-size: clamp(1rem, 1.15vw, 1.2rem);
@@ -141,6 +140,80 @@ html.lenis body {
   .section-num {
     @apply font-mono text-[11px] uppercase tracking-[0.3em];
     color: rgba(201, 166, 70, 0.7);
+  }
+
+  /* ---------- buttons ---------- */
+  .btn-gold {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.95rem 1.7rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #1c1407;
+    background: linear-gradient(135deg, #f4e6b8 0%, #d8b964 45%, #b8923a 100%);
+    box-shadow: 0 10px 34px -8px rgba(201, 166, 70, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.3s ease;
+  }
+  .btn-gold::before {
+    content: "";
+    height: 7px;
+    width: 7px;
+    border-radius: 999px;
+    background: rgba(28, 20, 7, 0.6);
+  }
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 44px -10px rgba(201, 166, 70, 0.75),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+  .btn-ghost {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.95rem 1.7rem;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text);
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(6px);
+    transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+  }
+  .btn-ghost::before {
+    content: "";
+    height: 7px;
+    width: 7px;
+    border-radius: 999px;
+    background: var(--gold);
+    box-shadow: 0 0 10px 1px rgba(201, 166, 70, 0.7);
+  }
+  .btn-ghost:hover {
+    border-color: var(--border-gold);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  /* pill chip (e.g. confidentiality strip) */
+  .chip-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-gold);
+    background: rgba(201, 166, 70, 0.05);
+    backdrop-filter: blur(6px);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
   }
 
   /* ---------- surfaces ---------- */
@@ -185,6 +258,19 @@ html.lenis body {
 .gold-glow {
   box-shadow: 0 0 0 1px var(--border-gold),
     0 26px 80px -24px rgba(201, 166, 70, 0.38);
+}
+
+/* ambient gold light pools to keep sections from feeling flat-black */
+.glow-pool {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    rgba(201, 166, 70, 0.16),
+    transparent 68%
+  );
+  filter: blur(40px);
+  pointer-events: none;
 }
 
 .mask-fade-b {

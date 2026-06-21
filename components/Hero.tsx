@@ -3,9 +3,10 @@
 import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ShieldCheck } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import Magnetic from "./Magnetic";
 import PrismFallback from "./PrismFallback";
+import AutoImage from "./AutoImage";
 
 const PyramidScene = dynamic(() => import("./PyramidScene"), { ssr: false });
 
@@ -67,7 +68,12 @@ export default function Hero() {
         style={{ y: sceneY, opacity: fadeOut }}
         className="absolute inset-0 z-10 md:left-[38%]"
       >
-        {use3D ? <PyramidScene /> : <PrismFallback />}
+        <AutoImage
+          src="/images/hero-pyramid.png"
+          alt="Золотая призма BPS"
+          className="h-full w-full object-cover object-center"
+          fallback={use3D ? <PyramidScene /> : <PrismFallback />}
+        />
       </motion.div>
 
       {/* legibility scrim over the scene on small screens */}
@@ -136,23 +142,15 @@ export default function Hero() {
             className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
           >
             <Magnetic strength={0.4}>
-              <a
-                href="#contact"
-                data-cursor="hover"
-                className="group inline-flex items-center gap-2 rounded-full bg-gold-gradient px-7 py-3.5 text-sm font-semibold text-black"
-              >
+              <a href="#contact" data-cursor="hover" className="btn-gold group">
                 Обсудить задачу
-                <ArrowDown
+                <ArrowRight
                   size={16}
-                  className="transition-transform group-hover:translate-y-0.5"
+                  className="transition-transform group-hover:translate-x-0.5"
                 />
               </a>
             </Magnetic>
-            <a
-              href="#about"
-              data-cursor="hover"
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 px-7 py-3.5 text-sm font-medium text-white/80 transition-colors hover:border-white/35 hover:text-white"
-            >
+            <a href="#about" data-cursor="hover" className="btn-ghost">
               О компании
             </a>
           </motion.div>

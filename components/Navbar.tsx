@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import Logo from "./Logo";
 import Magnetic from "./Magnetic";
 
@@ -62,12 +62,9 @@ export default function Navbar() {
         </nav>
 
         <Magnetic strength={0.5} className="hidden xl:block">
-          <a
-            href="#contact"
-            data-cursor="hover"
-            className="inline-flex items-center rounded-full bg-gold-gradient px-5 py-2.5 text-sm font-semibold text-black"
-          >
+          <a href="#contact" data-cursor="hover" className="btn-gold !py-2.5">
             Обсудить задачу
+            <ArrowRight size={15} />
           </a>
         </Magnetic>
 

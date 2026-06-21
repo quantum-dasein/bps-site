@@ -3,7 +3,8 @@
 import Reveal from "./Reveal";
 import AnimatedText from "./AnimatedText";
 import Logo, { LogoMark } from "./Logo";
-import Magnetic from "./Magnetic";
+import ContactForm from "./ContactForm";
+import AutoImage from "./AutoImage";
 import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
@@ -19,100 +20,104 @@ export default function Footer() {
           <span className="section-num hidden md:block">Ташкент, UZ</span>
         </div>
 
-        <div className="grid gap-14 lg:grid-cols-2">
-          <div>
-            <h2 className="t-h2 text-white">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          {/* left: heading + contact cards + ambient globe */}
+          <div className="relative">
+            <div className="glow-pool -right-24 top-10 hidden h-72 w-72 lg:block" />
+            {/* globe visual slot (renders only if the file exists) */}
+            <div className="pointer-events-none absolute -right-10 top-0 hidden w-[55%] opacity-70 lg:block">
+              <AutoImage
+                src="/images/contact-globe.png"
+                alt=""
+                className="w-full"
+              />
+            </div>
+
+            <h2 className="t-h2 relative text-white">
               <AnimatedText
                 text="Давайте усилим вашу команду"
                 highlight="команду"
               />
             </h2>
             <Reveal delay={0.15}>
-              <p className="mt-7 max-w-md text-base leading-relaxed text-white/60">
+              <p className="relative mt-7 max-w-md t-lead text-[var(--muted)]">
                 Опишите задачу — мы подберем сильных кандидатов в ключевых точках
                 роста по всему миру. Строго конфиденциально.
               </p>
             </Reveal>
-            <Reveal delay={0.25}>
-              <Magnetic strength={0.35} className="mt-9 inline-block">
+
+            <div className="relative mt-10 grid gap-3">
+              <Reveal delay={0.2}>
                 <a
                   href="mailto:info@bestpracticesolution.uz"
                   data-cursor="hover"
-                  className="inline-flex items-center gap-2 rounded-full bg-gold-gradient px-8 py-4 text-sm font-semibold text-black"
+                  className="glass-card group flex items-center justify-between p-5 transition-colors hover:border-gold-400/30"
                 >
-                  Написать нам
-                  <ArrowUpRight size={16} />
+                  <div className="flex items-center gap-4">
+                    <Mail className="text-gold-300" size={20} />
+                    <div>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted-2)]">
+                        Email
+                      </p>
+                      <p className="mt-1 text-[15px] text-white">
+                        info@bestpracticesolution.uz
+                      </p>
+                    </div>
+                  </div>
+                  <ArrowUpRight
+                    className="text-white/30 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-gold-300"
+                    size={18}
+                  />
                 </a>
-              </Magnetic>
-            </Reveal>
-          </div>
+              </Reveal>
 
-          <div className="grid gap-4 self-end">
-            <Reveal delay={0.1}>
-              <a
-                href="mailto:info@bestpracticesolution.uz"
-                data-cursor="hover"
-                className="glass-card group flex items-center justify-between p-6 transition-colors hover:border-gold-400/30"
-              >
-                <div className="flex items-center gap-4">
-                  <Mail className="text-gold-300" size={22} />
+              <Reveal delay={0.26}>
+                <div className="glass-card flex items-center gap-4 p-5">
+                  <Phone className="text-gold-300" size={20} />
                   <div>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
-                      Email
+                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted-2)]">
+                      Телефон
                     </p>
-                    <p className="mt-1 text-base text-white">
-                      info@bestpracticesolution.uz
+                    <div className="mt-1 flex flex-wrap gap-x-5 gap-y-1">
+                      <a
+                        href="tel:+998335011530"
+                        data-cursor="hover"
+                        className="text-[15px] text-white transition-colors hover:text-gold-200"
+                      >
+                        +998 33 501 15 30
+                      </a>
+                      <a
+                        href="tel:+998200032017"
+                        data-cursor="hover"
+                        className="text-[15px] text-white transition-colors hover:text-gold-200"
+                      >
+                        +998 20 003 20 17
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.32}>
+                <div className="glass-card flex items-center gap-4 p-5">
+                  <MapPin className="text-gold-300" size={20} />
+                  <div>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted-2)]">
+                      Адрес
+                    </p>
+                    <p className="mt-1 text-[15px] text-white">
+                      Ташкент, Узбекистан
                     </p>
                   </div>
                 </div>
-                <ArrowUpRight
-                  className="text-white/30 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-gold-300"
-                  size={20}
-                />
-              </a>
-            </Reveal>
-
-            <Reveal delay={0.16}>
-              <div className="glass-card flex items-center gap-4 p-6">
-                <Phone className="text-gold-300" size={22} />
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
-                    Телефон
-                  </p>
-                  <div className="mt-1 flex flex-wrap gap-x-5 gap-y-1">
-                    <a
-                      href="tel:+998335011530"
-                      data-cursor="hover"
-                      className="text-base text-white transition-colors hover:text-gold-200"
-                    >
-                      +998 33 501 15 30
-                    </a>
-                    <a
-                      href="tel:+998200032017"
-                      data-cursor="hover"
-                      className="text-base text-white transition-colors hover:text-gold-200"
-                    >
-                      +998 20 003 20 17
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.22}>
-              <div className="glass-card flex items-center gap-4 p-6">
-                <MapPin className="text-gold-300" size={22} />
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
-                    Адрес
-                  </p>
-                  <p className="mt-1 text-base text-white">
-                    Ташкент, Узбекистан
-                  </p>
-                </div>
-              </div>
-            </Reveal>
+              </Reveal>
+            </div>
           </div>
+
+          {/* right: working contact form */}
+          <Reveal delay={0.15} className="self-center">
+            <ContactForm />
+          </Reveal>
         </div>
 
         {/* giant wordmark */}

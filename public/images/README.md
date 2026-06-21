@@ -6,12 +6,18 @@ to the local path (e.g. `image: "/images/uae-office.webp"`).
 
 Generate at ~1600×2000 px (portrait). Save as PNG (ChatGPT default) — that works fine.
 
-| Filename             | Used for                         | Where to wire it                         |
-|----------------------|----------------------------------|------------------------------------------|
-| `cis-market.png`     | СНГ region card                  | Geography.tsx → regions[0].image         |
-| `uae-office.png`     | ОАЭ region card                  | Geography.tsx → regions[1].image         |
-| `asia-market.png`    | Китай и Индия region card        | Geography.tsx → regions[2].image         |
-| `hero-bg.png`        | (optional) ambient hero backdrop | Hero.tsx background layer                 |
+| Filename                  | Used for                         | Auto-detected? |
+|---------------------------|----------------------------------|----------------|
+| `hero-pyramid.png`        | Big gold pyramid in the hero     | ✅ auto (falls back to WebGL prism) |
+| `methodology-radar.png`   | Radar visual in «Как мы работаем»| ✅ auto (falls back to SVG radar)   |
+| `contact-globe.png`       | Globe glow in contacts           | ✅ auto (hidden if absent)          |
+| `cis-market.png/.jpg`     | СНГ region card                  | wired in Geography.tsx              |
+| `uae-office.png`          | ОАЭ region card                  | wired in Geography.tsx              |
+| `asia-market.png`         | Китай и Индия region card        | wired in Geography.tsx              |
+
+The first three are picked up **automatically** — just drop the file with the exact
+name into this folder and the site swaps the placeholder visual for your render.
+No code changes needed.
 
 ## Optional: use your real logo
 

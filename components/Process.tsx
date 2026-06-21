@@ -2,14 +2,22 @@
 
 import Reveal from "./Reveal";
 import AnimatedText from "./AnimatedText";
-import { ScanSearch, Crosshair, ClipboardCheck, ListChecks } from "lucide-react";
+import AutoImage from "./AutoImage";
+import {
+  ScanSearch,
+  Crosshair,
+  ClipboardCheck,
+  ListChecks,
+  ShieldCheck,
+  ArrowRight,
+} from "lucide-react";
 
 const steps = [
   {
     n: "01",
     icon: ScanSearch,
     title: "Анализ рынка",
-    text: "Изучаем рынок труда, картируем компании-доноры и определяем, где находятся сильные кандидаты под задачу.",
+    text: "Изучаем рынок труда, картируем компании-лидеры и определяем, где находятся сильные кандидаты под задачу.",
   },
   {
     n: "02",
@@ -31,9 +39,74 @@ const steps = [
   },
 ];
 
+/** SVG radar used until /images/methodology-radar.png is provided. */
+function RadarFallback() {
+  return (
+    <div className="relative flex h-full w-full items-center justify-center">
+      <svg viewBox="0 0 400 300" className="h-full w-full" aria-hidden="true">
+        <defs>
+          <radialGradient id="rad-core" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#FFF2CD" />
+            <stop offset="60%" stopColor="#D4AF37" />
+            <stop offset="100%" stopColor="#8C6E1C" />
+          </radialGradient>
+        </defs>
+        <g
+          transform="translate(200 150)"
+          stroke="rgba(201,166,70,0.35)"
+          fill="none"
+        >
+          {[40, 75, 110, 145].map((r) => (
+            <ellipse key={r} rx={r * 1.5} ry={r * 0.62} strokeWidth="1" />
+          ))}
+          {/* connecting spokes */}
+          <line x1="-200" y1="0" x2="200" y2="0" strokeWidth="0.6" />
+          <line x1="0" y1="-95" x2="0" y2="95" strokeWidth="0.6" />
+        </g>
+        {/* candidate nodes */}
+        {[
+          [120, 70],
+          [285, 120],
+          [250, 215],
+          [110, 205],
+          [320, 60],
+        ].map(([x, y], i) => (
+          <g key={i}>
+            <circle cx={x} cy={y} r="4" fill="#E4C96A">
+              <animate
+                attributeName="opacity"
+                values="0.4;1;0.4"
+                dur={`${2.5 + i * 0.4}s`}
+                repeatCount="indefinite"
+              />
+            </circle>
+            <circle cx={x} cy={y} r="9" fill="none" stroke="rgba(201,166,70,0.3)" />
+          </g>
+        ))}
+        {/* center */}
+        <circle cx="200" cy="150" r="11" fill="url(#rad-core)" />
+        <circle cx="200" cy="150" r="20" fill="none" stroke="rgba(201,166,70,0.4)">
+          <animate
+            attributeName="r"
+            values="14;40"
+            dur="3s"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="opacity"
+            values="0.6;0"
+            dur="3s"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </svg>
+    </div>
+  );
+}
+
 export default function Process() {
   return (
-    <section id="process" className="section-pad relative">
+    <section id="process" className="section-pad relative overflow-hidden">
       <div className="hairline absolute inset-x-0 top-0" />
       <div className="container-bps">
         <div className="mb-14 flex items-center justify-between">
@@ -41,24 +114,39 @@ export default function Process() {
           <span className="section-num hidden md:block">Precision Search</span>
         </div>
 
-        <div className="max-w-3xl">
-          <h2 className="t-h2 text-white">
-            <AnimatedText
-              text="Целевой поиск вместо потока резюме"
-              highlight="потока резюме"
-            />
-          </h2>
-          <Reveal delay={0.1}>
-            <p className="mt-6 max-w-xl t-lead text-[var(--muted)]">
-              Мы не работаем с потоком резюме. Мы выстраиваем целевой поиск,
-              анализируем рынок и выводим заказчика на короткий список
-              кандидатов, соответствующих задачам бизнеса.
-            </p>
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1fr]">
+          {/* heading + copy */}
+          <div>
+            <h2 className="t-h2 text-white">
+              <AnimatedText
+                text="Целевой поиск вместо потока резюме"
+                highlight="потока резюме"
+              />
+            </h2>
+            <Reveal delay={0.1}>
+              <p className="mt-6 max-w-xl t-lead text-[var(--muted)]">
+                Мы не работаем с потоком резюме. Мы выстраиваем целевой поиск,
+                анализируем рынок и выводим заказчика на короткий список
+                кандидатов, соответствующих задачам бизнеса.
+              </p>
+            </Reveal>
+          </div>
+
+          {/* radar visual (image slot with graceful fallback) */}
+          <Reveal delay={0.15}>
+            <div className="relative aspect-[4/3] w-full">
+              <div className="glow-pool inset-[10%]" />
+              <AutoImage
+                src="/images/methodology-radar.png"
+                alt="Целевой поиск кандидатов"
+                className="relative h-full w-full object-contain"
+                fallback={<RadarFallback />}
+              />
+            </div>
           </Reveal>
         </div>
 
         <div className="relative mt-16">
-          {/* connecting line */}
           <div className="pointer-events-none absolute left-0 top-[3.25rem] hidden h-px w-full bg-gradient-to-r from-transparent via-gold-400/30 to-transparent lg:block" />
 
           <div className="grid gap-px overflow-hidden rounded-3xl border border-[var(--border)] lg:grid-cols-4 lg:gap-0 lg:rounded-none lg:border-0">
@@ -66,12 +154,12 @@ export default function Process() {
               <Reveal key={s.n} delay={i * 0.08}>
                 <div className="group relative h-full bg-white/[0.012] p-8 lg:bg-transparent lg:px-5 lg:py-0">
                   <div className="mb-6 flex items-center gap-4">
-                    <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--border-gold)] bg-ink text-gold-200 transition-all duration-300 group-hover:-translate-y-1 group-hover:border-gold-400/60">
-                      <s.icon size={24} />
-                    </div>
-                    <span className="font-mono text-xs text-gold-400/60">
+                    <span className="font-mono text-3xl text-white/15">
                       {s.n}
                     </span>
+                    <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--border-gold)] bg-ink text-gold-200 transition-all duration-300 group-hover:-translate-y-1 group-hover:border-gold-400/60">
+                      <s.icon size={22} />
+                    </div>
                   </div>
                   <h3 className="font-display text-xl font-semibold text-white">
                     {s.title}
@@ -79,11 +167,24 @@ export default function Process() {
                   <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
                     {s.text}
                   </p>
+                  <ArrowRight
+                    size={18}
+                    className="mt-5 text-gold-400/60 transition-transform duration-300 group-hover:translate-x-1"
+                  />
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
+
+        <Reveal delay={0.1}>
+          <div className="mt-16 flex justify-center">
+            <span className="chip-line">
+              <ShieldCheck size={14} />
+              Строгая конфиденциальность на каждом этапе
+            </span>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
