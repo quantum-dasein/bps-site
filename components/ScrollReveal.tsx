@@ -21,7 +21,11 @@ export default function ScrollReveal({ children }: { children: ReactNode }) {
   if (reduce) return <div>{children}</div>;
 
   return (
-    <motion.div ref={ref} style={{ opacity, y, willChange: "transform, opacity" }}>
+    <motion.div
+      ref={ref}
+      className="relative"
+      style={{ opacity, y, willChange: "transform, opacity" }}
+    >
       {children}
     </motion.div>
   );

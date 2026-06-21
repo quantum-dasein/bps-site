@@ -175,7 +175,16 @@ export default function Radar3D({ className = "" }: { className?: string }) {
   }
 
   return (
-    <div className={className} ref={wrap}>
+    <div
+      className={className}
+      ref={wrap}
+      style={{
+        WebkitMaskImage:
+          "radial-gradient(circle at 50% 50%, #000 46%, transparent 74%)",
+        maskImage:
+          "radial-gradient(circle at 50% 50%, #000 46%, transparent 74%)",
+      }}
+    >
       {visible && (
         <Canvas
           camera={{ position: [0, 0, 4.2], fov: 42 }}

@@ -197,7 +197,16 @@ export default function Globe3D({ className = "" }: { className?: string }) {
   }
 
   return (
-    <div className={className} ref={wrap}>
+    <div
+      className={className}
+      ref={wrap}
+      style={{
+        WebkitMaskImage:
+          "radial-gradient(circle at 50% 50%, #000 50%, transparent 72%)",
+        maskImage:
+          "radial-gradient(circle at 50% 50%, #000 50%, transparent 72%)",
+      }}
+    >
       {visible && (
         <Canvas
           camera={{ position: [0, 0, 3.1], fov: 42 }}

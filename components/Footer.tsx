@@ -25,10 +25,10 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* left: heading + contact cards + interactive 3D globe */}
           <div className="relative">
-            <div className="glow-pool -left-[12%] bottom-0 hidden h-[32rem] w-[32rem] lg:block" />
-            {/* interactive 3D globe — sits in the lower area, behind the cards,
-                so it never covers the heading text */}
-            <Globe3D className="pointer-events-none absolute bottom-0 left-[-6%] hidden aspect-square w-[88%] max-w-[460px] translate-y-[14%] lg:block" />
+            <div className="glow-pool bottom-0 left-1/2 hidden h-[24rem] w-[24rem] -translate-x-1/2 translate-y-[24%] lg:block" />
+            {/* interactive 3D globe — sits low, behind the cards, so it never
+                covers the heading text */}
+            <Globe3D className="pointer-events-none absolute bottom-0 left-1/2 hidden aspect-square w-[86%] max-w-[420px] -translate-x-1/2 translate-y-[28%] lg:block" />
 
             <h2 className="t-h2 relative text-white">
               <AnimatedText

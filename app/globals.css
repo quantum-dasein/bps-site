@@ -348,6 +348,13 @@ html.lenis body {
   }
 }
 
+/* preloader triangle line-draw */
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 /* radar scan sweep (Geography panel) */
 @keyframes scan {
   0% {
