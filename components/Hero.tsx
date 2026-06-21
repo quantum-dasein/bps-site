@@ -81,7 +81,7 @@ export default function Hero() {
 
       <motion.div
         style={{ y: textY }}
-        className="container-bps relative z-20 my-auto grid items-center gap-10 pt-28 md:grid-cols-[1.1fr_0.9fr] md:pt-0"
+        className="container-bps relative z-20 grid items-center gap-10 pb-20 pt-32 md:grid-cols-[1.1fr_0.9fr] md:pb-0 md:pt-36"
       >
         <div>
           <motion.div

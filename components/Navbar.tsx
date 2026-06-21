@@ -27,12 +27,20 @@ export default function Navbar() {
   }, []);
 
   return (
-    <motion.header
-      initial={{ y: -90, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 2.4 }}
-      className="fixed inset-x-0 top-0 z-[8000] px-3 pt-3"
-    >
+    <>
+      {/* top scrim — masks content peeking through the floating-header gap */}
+      <div
+        aria-hidden
+        className={`pointer-events-none fixed inset-x-0 top-0 z-[7900] h-24 bg-gradient-to-b from-ink via-ink/80 to-transparent transition-opacity duration-500 ${
+          scrolled ? "opacity-100" : "opacity-0"
+        }`}
+      />
+      <motion.header
+        initial={{ y: -90, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 2.4 }}
+        className="fixed inset-x-0 top-0 z-[8000] px-3 pt-3"
+      >
       <div
         className={`mx-auto flex max-w-[1280px] items-center justify-between rounded-2xl px-5 py-3 transition-all duration-500 md:px-7 ${
           scrolled
@@ -110,6 +118,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+      </motion.header>
+    </>
   );
 }
