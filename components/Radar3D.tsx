@@ -144,9 +144,8 @@ export default function Radar3D({ className = "" }: { className?: string }) {
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const small = window.innerWidth < 768;
     const force = new URLSearchParams(window.location.search).has("force3d");
-    setMode((reduce || small) && !force ? "fallback" : "3d");
+    setMode(reduce && !force ? "fallback" : "3d");
   }, []);
 
   // only run the WebGL canvas while the section is on/near screen
